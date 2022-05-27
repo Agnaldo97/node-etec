@@ -1,0 +1,28 @@
+CREATE TABLE person (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  cpf INTEGER NOT NULL UNIQUE,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE account (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  person_id INTEGER NOT NULL,
+  amount REAL NOT NULL,
+  status INTEGER NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT null,
+  FOREIGN KEY(person_id) REFERENCES person(id)
+);
+
+
+CREATE TABLE transactions (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_account INTEGER NOT NULL,
+  amount REAL NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT null,
+  FOREIGN KEY(id_account) REFERENCES account(id)
+);
+
+INSERT INTO person (name, cpf) VALUES ('Agnaldo Rogério', 42990936823);
+
+INSERT INTO account (person_id, amount,status) VALUES (1, 40, 1);
